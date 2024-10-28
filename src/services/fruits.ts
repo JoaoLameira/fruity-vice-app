@@ -2,7 +2,7 @@ import { Fruit } from '@/types'
 
 export const getFruits = async (): Promise<Fruit[] | undefined> => {
 	//const url = import.meta.env.VITE_NODE_ENV == 'development' ? '/api' : import.meta.env.VITE_API_URL
-	const url = '/api/proxy'
+	const url = '/api'
 
 	try {
 		const response = await fetch(url)
