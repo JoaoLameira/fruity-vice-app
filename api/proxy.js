@@ -1,7 +1,6 @@
 import { createProxyMiddleware } from 'http-proxy-middleware'
 
 const target = process.env.VITE_API_URL
-
 const proxy = createProxyMiddleware({
 	target,
 	changeOrigin: true,
