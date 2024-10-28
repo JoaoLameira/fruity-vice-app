@@ -7,6 +7,7 @@ export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd())
 	return {
 		plugins: [react()],
+		base: '/fruity-vice-app/',
 		resolve: {
 			alias: {
 				'@': path.resolve(__dirname, './src')
@@ -18,10 +19,6 @@ export default defineConfig(({ mode }) => {
 			watch: {
 				usePolling: true
 			},
-			/* headers: {
-				'Access-Control-Allow-Origin': '*',
-				'Content-Type': 'application/javascript'
-			}, */
 			proxy: {
 				'/api': {
 					target: env.VITE_API_URL,
