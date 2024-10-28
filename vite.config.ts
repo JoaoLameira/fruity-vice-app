@@ -18,14 +18,14 @@ export default defineConfig(({ mode }) => {
 			host: true,
 			watch: {
 				usePolling: true
-			},
-			proxy: {
+			}
+			/* 			proxy: {
 				'/api': {
 					target: env.VITE_API_URL,
 					changeOrigin: true,
 					rewrite: path => path.replace(/^\/api/, '')
 				}
-			}
+			} */
 		}
 	}
 })
