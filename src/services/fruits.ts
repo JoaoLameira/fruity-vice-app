@@ -1,4 +1,4 @@
-import { Fruit } from '@/types/fruits'
+import { Fruit } from '@/types'
 
 export const getFruits = async (): Promise<Fruit[] | undefined> => {
 	try {
