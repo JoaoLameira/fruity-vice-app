@@ -2,7 +2,7 @@ import { Fruit } from '@/types'
 
 export const getFruits = async (): Promise<Fruit[] | undefined> => {
 	try {
-		const response = await fetch('/api', {
+		const response = await fetch('https://wcz3qr33kmjvzotdqt65efniv40kokon.lambda-url.us-east-2.on.aws/', {
 			headers: {
 				Accept: 'application/json, text/plain',
 				'Content-Type': 'application/json',
