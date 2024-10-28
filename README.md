@@ -11,6 +11,15 @@
 - Tailwind
 - Shadcn
 
+### Environment variables
+
+In the root folder there is an example of an env file with all variables that should be filled for development.
+
+| Environment Variables | Default value           |
+| --------------------- | ----------------------- |
+| `VITE_API_URL`        |                         |
+| `VITE_NODE_ENV`       | development, production |
+
 ## Dependencies
 
 - Node

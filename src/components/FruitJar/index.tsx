@@ -6,11 +6,8 @@ import { ListView } from '../List'
 
 const FruitJar: React.FC = () => {
 	const { selectedFruits } = useSelectedFruits()
-
 	const groupedFruits = useFruitsGrouping({ fruits: selectedFruits, groupBy: 'name' })
-
 	const groupedFruitsEntries = Object.entries(groupedFruits)
-
 	const listViewData = groupedFruitsEntries.map(([groupName, fruits]) => {
 		return (
 			<div className='grid grid-cols-3'>

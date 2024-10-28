@@ -7,6 +7,7 @@ import { ListView } from '@/components/List'
 import { useFruitsGrouping } from '@/hooks/useFruitsGrouping'
 import { useAtomValue } from 'jotai'
 import { groupByAtom } from '@/atoms'
+import { AddAllToJar } from '@/components/Buttons/AddAllToJar'
 
 interface FruitGroupProps {
 	fruits: Fruit[]
@@ -34,8 +35,15 @@ const FruitGroup: React.FC<FruitGroupProps> = ({ fruits }) => {
 	return (
 		<Accordion type='multiple'>
 			{Object.entries(groupedFruits).map(([groupName, fruits], index) => (
-				<AccordionItem value={`items-${index}`} key={`items-${index}`} defaultChecked={index == 0}>
-					<AccordionTrigger>{groupName}</AccordionTrigger>
+				<AccordionItem value={`items-${index}`} key={`items-${index}`}>
+					<AccordionTrigger>
+						<div className='flex w-full justify-between'>
+							{groupName}
+							<div className='mr-5'>
+								<AddAllToJar fruits={fruits} />
+							</div>
+						</div>
+					</AccordionTrigger>
 					<AccordionContent>{renderFruit(fruits)}</AccordionContent>
 				</AccordionItem>
 			))}
