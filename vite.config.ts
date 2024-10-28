@@ -7,7 +7,8 @@ export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd())
 	return {
 		plugins: [react()],
-		base: '/fruity-vice-app/',
+		//base: command == 'build' ? '/fruity-vice-app/' : '/',
+		base: '/',
 		resolve: {
 			alias: {
 				'@': path.resolve(__dirname, './src')
