@@ -1,14 +1,13 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 
 // https://vite.dev/config/
-export default defineConfig(() => {
-	/* const env = loadEnv(mode, process.cwd()) */
+export default defineConfig(({ command, mode }) => {
+	const env = loadEnv(mode, process.cwd())
 	return {
 		plugins: [react()],
-		//base: command == 'build' ? '/fruity-vice-app/' : '/',
-		base: '/',
+		base: command == 'build' ? '/fruity-vice-app/' : '/',
 		resolve: {
 			alias: {
 				'@': path.resolve(__dirname, './src')
@@ -22,7 +21,7 @@ export default defineConfig(() => {
 			},
 			proxy: {
 				'/api': {
-					target: 'https://wcz3qr33kmjvzotdqt65efniv40kokon.lambda-url.us-east-2.on.aws',
+					target: env.VITE_API_URL,
 					changeOrigin: true,
 					rewrite: path => path.replace(/^\/api/, '')
 				}

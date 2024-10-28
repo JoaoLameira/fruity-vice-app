@@ -21,6 +21,9 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Build project
+        env:
+          VITE_NODE_ENV: ${{ secrets.VITE_NODE_ENV }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
         run: npm run build
 
       - name: Upload production-ready build files
