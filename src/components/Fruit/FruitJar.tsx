@@ -2,7 +2,7 @@ import React from 'react'
 import useSelectedFruits from '@/hooks/useSelectedFruits'
 import { useFruitsGrouping } from '@/hooks/useFruitsGrouping'
 import { PieChart } from '@/components/PieChart'
-import { ListView } from '../List'
+import { ListView } from '@/components/List'
 
 const FruitJar: React.FC = () => {
 	const { selectedFruits } = useSelectedFruits()
@@ -20,10 +20,10 @@ const FruitJar: React.FC = () => {
 
 	return (
 		<div className='sticky top-10 pb-5'>
-			<div className='item-center flex justify-between'>
+			<header className='item-center flex justify-between'>
 				<h2 className='font-extrabold'>Selected Fruits (In the Jar)</h2>
-				<h2 className='font-extrabold'>{`${selectedFruits.length} fruits`}</h2>
-			</div>
+				<h3 className='font-extrabold'>{`${selectedFruits.length} fruits`}</h3>
+			</header>
 
 			<PieChart selectedFruits={selectedFruits} groupedFruits={groupedFruits} />
 

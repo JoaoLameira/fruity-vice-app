@@ -2,7 +2,7 @@ import { Fruit, GroupByType } from '@/types'
 import React from 'react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { useViewType } from '@/hooks/useViewtype'
-import { TableView } from '@/components/FruitList/TableView'
+import { TableView } from '@/components/Table'
 import { ListView } from '@/components/List'
 import { useFruitsGrouping } from '@/hooks/useFruitsGrouping'
 import { useAtomValue } from 'jotai'
@@ -21,8 +21,7 @@ const FruitGroup: React.FC<FruitGroupProps> = ({ fruits }) => {
 	const isFlatList = groupedFruitsKeys.length == 1 && groupedFruitsKeys.includes('all')
 
 	const renderFruit = (fruits: Fruit[]) => {
-		const dataForListView = fruits.map(fruit => `${fruit.name} (${fruit.nutritions.calories} kcal)`)
-
+		const dataForListView = fruits.map(({ name, nutritions: { calories } }) => `${name} (${calories} kcal)`)
 		return viewType === 'list' ? (
 			<ListView data={dataForListView} fruits={fruits} addButton />
 		) : (
@@ -38,7 +37,7 @@ const FruitGroup: React.FC<FruitGroupProps> = ({ fruits }) => {
 				<AccordionItem value={`items-${index}`} key={`items-${index}`}>
 					<AccordionTrigger>
 						<div className='flex w-full justify-between'>
-							{groupName}
+							<p>{groupName}</p>
 							<div className='mr-5'>
 								<AddAllToJar fruits={fruits} />
 							</div>

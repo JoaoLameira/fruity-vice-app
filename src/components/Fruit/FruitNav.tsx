@@ -1,5 +1,5 @@
-import { ViewSwitcher } from '@/components/FruitList/ViewSwitcher'
-import { GroupBySelector } from '@/components/GroupBySelector'
+import { ViewSwitcher } from '@/components/Buttons/ViewSwitcher'
+import { GroupBySelector } from '@/components/GroupBy'
 
 const FruitNav: React.FC = () => {
 	return (

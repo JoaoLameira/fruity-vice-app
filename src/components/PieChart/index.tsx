@@ -30,19 +30,23 @@ const CustomPieChart: React.FC<IPieChartProps> = ({ selectedFruits, groupedFruit
 		<ChartContainer config={chartConfig} className='mx-auto aspect-square max-h-[50vh]'>
 			<RechartsPieChart>
 				<ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-				<Pie data={chartData} dataKey='visitors' nameKey='browser' innerRadius={140} strokeWidth={5}>
+				<Pie data={chartData} dataKey='visitors' nameKey='browser' innerRadius={140}>
 					<Label
 						content={({ viewBox }) => {
 							if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
 								return (
 									<text x={viewBox.cx} y={viewBox.cy} textAnchor='middle' dominantBaseline='middle'>
-										<tspan x={viewBox.cx} y={viewBox.cy} className='fill-foreground text-6xl font-extrabold'>
+										<tspan
+											x={viewBox.cx}
+											y={viewBox.cy}
+											className='fill-foreground text-3xl font-extrabold lg:text-6xl'
+										>
 											{totalCalories}
 										</tspan>
 										<tspan
 											x={viewBox.cx}
 											y={viewBox.cy ? viewBox.cy + 40 : 0}
-											className='fill-muted-foreground text-2xl'
+											className='fill-muted-foreground text-md lg:text-2xl'
 										>
 											calories
 										</tspan>

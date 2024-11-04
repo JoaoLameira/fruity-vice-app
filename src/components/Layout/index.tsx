@@ -1,14 +1,12 @@
 import React from 'react'
-import { FruitList } from '@/components/FruitList'
-import { FruitJar } from '@/components/FruitJar'
-import { FruitNav } from '@/components/FruitList/Nav'
+import { FruitList } from '@/components/Fruit/FruitList'
+import { FruitJar } from '@/components/Fruit/FruitJar'
 
 const Layout: React.FC = () => {
 	return (
-		<main className='min-h-screen px-10 py-10'>
-			<div className='flex gap-20'>
+		<main className='min-screen p-3 lg:p-10'>
+			<div className='flex flex-col-reverse gap-y-10 lg:flex-row lg:gap-20'>
 				<section className='flex-1'>
-					<FruitNav />
 					<FruitList />
 				</section>
 				<section className='flex-auto'>
