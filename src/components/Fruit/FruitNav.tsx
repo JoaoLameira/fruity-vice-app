@@ -1,5 +1,6 @@
 import { ViewSwitcher } from '@/components/Buttons/ViewSwitcher'
 import { GroupBySelector } from '@/components/GroupBy'
+import Search from '@/components/Search'
 
 const FruitNav: React.FC = () => {
 	return (
@@ -7,6 +8,7 @@ const FruitNav: React.FC = () => {
 			<nav className='flex items-center space-x-4'>
 				<ViewSwitcher />
 				<GroupBySelector />
+				<Search />
 			</nav>
 		</div>
 	)

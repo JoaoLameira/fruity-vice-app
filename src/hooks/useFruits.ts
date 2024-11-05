@@ -1,11 +1,11 @@
-import { useAtom } from 'jotai'
-import { atomWithQuery } from 'jotai-tanstack-query'
-import { getFruits } from '@/services/fruits'
-import { Fruit } from '@/types'
+import { useAtom, useAtomValue } from 'jotai'
+import { filteredFruitsAtom, fruitsAtom } from '@/atoms'
 
-const fruitsAtom = atomWithQuery<Fruit[] | undefined>(() => ({
-	queryKey: ['fruits'],
-	queryFn: () => getFruits()
-}))
+const useFruits = () => {
+	const [{ data, isError, error, isLoading, isSuccess }] = useAtom(fruitsAtom)
+	const filteredFruit = useAtomValue(filteredFruitsAtom)
 
-export const useFruits = () => useAtom(fruitsAtom)
+	return { allFruit: data, filteredFruit, error, isError, isLoading, isSuccess }
+}
+
+export default useFruits

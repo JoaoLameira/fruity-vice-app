@@ -19,4 +19,4 @@ export interface Fruit {
 	nutritions: Nutrition
 }
 
-export type IFruitGroup = Record<string, Fruit[]>
+export type IFruitGroup = Record<string, Fruit[]> | undefined

@@ -16,7 +16,7 @@ const GroupBySelector: React.FC = () => {
 
 	return (
 		<Select value={groupBy} onValueChange={e => setGroupBy(e as GroupByType)}>
-			<SelectTrigger className='w-[180px]'>
+			<SelectTrigger className='w-60'>
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent>

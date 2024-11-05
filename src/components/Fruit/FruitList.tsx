@@ -1,24 +1,41 @@
 import React from 'react'
-import { useFruits } from '@/hooks/useFruits'
-import { FruitGroup } from '@/components/Fruit/FruitGroup'
+import useFruits from '@/hooks/useFruits'
 import { toast } from 'sonner'
-import { FruitNav } from '@/components/Fruit/FruitNav'
-import { ListLoading } from '../List/Loading'
+import { FruitView } from '@/components/Fruit/FruitView'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { AddAllToJar } from '@/components/Buttons/AddAllToJar'
+import { useAtomValue } from 'jotai'
+import { GroupByType } from '@/types'
+import { groupByAtom } from '@/atoms'
+import { useFruitsGrouping } from '@/hooks/useFruitsGrouping'
 
 const FruitList: React.FC = () => {
-	const [{ data: fruits, isLoading, isError, error }] = useFruits()
+	const { error, isError, isLoading, filteredFruit } = useFruits()
+	const groupBy = useAtomValue<GroupByType>(groupByAtom)
+	const groupedFruits = useFruitsGrouping({ fruits: filteredFruit, groupBy })
 
-	if (isError) return toast.error(error.message)
+	if (isError && error) return toast.error(error.message)
 
-	if (!fruits && !isLoading) return toast.error('No Fruits!')
+	if (groupBy === 'none') return <FruitView fruits={filteredFruit} isLoading={isLoading} />
 
 	return (
-		<div>
-			<FruitNav />
-			{isLoading && <ListLoading />}
-
-			{fruits && <FruitGroup fruits={fruits} />}
-		</div>
+		<Accordion type='multiple'>
+			{Object.entries(groupedFruits ?? {}).map(([groupName, fruits], index) => (
+				<AccordionItem value={`items-${index}`} key={`items-${index}`}>
+					<AccordionTrigger>
+						<div className='flex w-full justify-between'>
+							<p>{groupName}</p>
+							<div className='mr-4'>
+								<AddAllToJar fruits={fruits} />
+							</div>
+						</div>
+					</AccordionTrigger>
+					<AccordionContent>
+						<FruitView fruits={fruits} isLoading={isLoading} />
+					</AccordionContent>
+				</AccordionItem>
+			))}
+		</Accordion>
 	)
 }
 

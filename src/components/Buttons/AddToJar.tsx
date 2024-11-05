@@ -1,17 +1,16 @@
 import { Fruit } from '@/types'
 import { Button } from '@/components/ui/button'
-import useSelectedFruits from '@/hooks/useSelectedFruits'
+import useJarFruits from '@/hooks/useJarFruits'
 
 interface IAddToJar {
 	fruit: Fruit
 }
 
 const AddToJar: React.FC<IAddToJar> = ({ fruit }) => {
-	const { addFruitToJar } = useSelectedFruits()
-	const addToJar = (fruit: Fruit) => addFruitToJar(fruit)
+	const { addFruitToJar } = useJarFruits()
 
 	return (
-		<Button size='sm' onClick={() => addToJar(fruit)}>
+		<Button size='sm' onClick={() => addFruitToJar(fruit)}>
 			<span className='text-xs'>Add</span>
 		</Button>
 	)

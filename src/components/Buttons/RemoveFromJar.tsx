@@ -1,17 +1,16 @@
 import { Fruit } from '@/types'
 import { Button } from '@/components/ui/button'
-import useSelectedFruits from '@/hooks/useSelectedFruits'
+import useJarFruits from '@/hooks/useJarFruits'
 
 interface IRemoveFromJar {
 	fruit: Fruit
 }
 
 const RemoveFromJar: React.FC<IRemoveFromJar> = ({ fruit }) => {
-	const { removeFruitFromJar } = useSelectedFruits()
-	const removeFromJar = (fruit: Fruit) => removeFruitFromJar(fruit)
+	const { removeFruitFromJar } = useJarFruits()
 
 	return (
-		<Button size='sm' onClick={() => removeFromJar(fruit)}>
+		<Button size='sm' onClick={() => removeFruitFromJar(fruit)}>
 			<span className='text-xs'>Remove</span>
 		</Button>
 	)

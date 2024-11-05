@@ -3,11 +3,13 @@ import { Fruit } from '@/types'
 import { AddToJar } from '@/components/Buttons/AddToJar'
 
 interface ITableView {
-	data: Fruit[]
+	data: Fruit[] | undefined
 }
 
 const TableView: React.FC<ITableView> = ({ data }) => {
 	const tableHeads = ['Name', 'Family', 'Order', 'Genus', 'Calories']
+
+	if (!data) return <p>No items!</p>
 
 	return (
 		<Table>

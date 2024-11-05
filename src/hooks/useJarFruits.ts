@@ -1,10 +1,10 @@
 import { useAtom } from 'jotai'
-import { selectedFruitsAtom } from '@/atoms'
+import { jarAtom } from '@/atoms'
 import { Fruit } from '@/types'
 import { toast } from 'sonner'
 
-const useSelectedFruits = () => {
-	const [selectedFruits, setSelectedFruits] = useAtom<Fruit[]>(selectedFruitsAtom)
+const useJarFruits = () => {
+	const [selectedFruits, setSelectedFruits] = useAtom<Fruit[]>(jarAtom)
 
 	const addFruitToJar = (fruit: Fruit) => {
 		if (selectedFruits.includes(fruit)) toast.info('Fruit is already in the jar!')
@@ -38,4 +38,4 @@ const useSelectedFruits = () => {
 	}
 }
 
-export default useSelectedFruits
+export default useJarFruits

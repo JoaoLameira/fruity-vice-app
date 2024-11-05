@@ -1,22 +1,33 @@
-import React from 'react'
-import useSelectedFruits from '@/hooks/useSelectedFruits'
+import React, { useMemo } from 'react'
+import useJarFruits from '@/hooks/useJarFruits'
 import { useFruitsGrouping } from '@/hooks/useFruitsGrouping'
 import { PieChart } from '@/components/PieChart'
 import { ListView } from '@/components/List'
+import { RemoveFromJar } from '../Buttons/RemoveFromJar'
 
 const FruitJar: React.FC = () => {
-	const { selectedFruits } = useSelectedFruits()
+	const { selectedFruits } = useJarFruits()
 	const groupedFruits = useFruitsGrouping({ fruits: selectedFruits, groupBy: 'name' })
-	const groupedFruitsEntries = Object.entries(groupedFruits)
-	const listViewData = groupedFruitsEntries.map(([groupName, fruits]) => {
-		return (
-			<div className='grid grid-cols-3'>
-				<p> {groupName}</p>
-				<p> {fruits.length} items</p>
-				<p> {fruits.reduce((sum, { nutritions: { calories } }) => sum + calories, 0)} kcal</p>
-			</div>
-		)
-	})
+	const groupedFruitsEntries = Object.entries(groupedFruits ?? {})
+
+	const selectedListView = useMemo(
+		() =>
+			groupedFruitsEntries.map(([name, fruits]) => {
+				const fruitToRemove = fruits[fruits.findIndex(fruit => fruit.name === name)]
+				const calories = fruits.reduce((sum, { nutritions: { calories } }) => sum + calories, 0)
+				return (
+					<>
+						<ul className='grid w-full grid-cols-3'>
+							<li> {name}</li>
+							<li> {fruits.length} items</li>
+							<li> {calories} kcal</li>
+						</ul>
+						<RemoveFromJar fruit={fruitToRemove} />
+					</>
+				)
+			}),
+		[groupedFruitsEntries]
+	)
 
 	return (
 		<div className='sticky top-10 pb-5'>
@@ -27,11 +38,7 @@ const FruitJar: React.FC = () => {
 
 			<PieChart selectedFruits={selectedFruits} groupedFruits={groupedFruits} />
 
-			{groupedFruitsEntries.length > 0 ? (
-				<ListView data={listViewData} fruits={selectedFruits} removeButton />
-			) : (
-				<div className='text-center'>No fruits selected</div>
-			)}
+			<ListView data={selectedListView} />
 		</div>
 	)
 }
