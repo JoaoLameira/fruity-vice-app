@@ -11,7 +11,7 @@ interface IPieChartProps {
 
 const CustomPieChart: React.FC<IPieChartProps> = ({ selectedFruits, groupedFruits }) => {
 	const totalCalories = selectedFruits.reduce((sum, { nutritions: { calories } }) => sum + calories, 0)
-	const groupedFruitsEntries = Object.entries(groupedFruits)
+	const groupedFruitsEntries = Object.entries(groupedFruits ?? {})
 	const colors = generateGrayShades(groupedFruitsEntries.length)
 
 	const chartData = groupedFruitsEntries.map(([groupName, fruits], index) => ({
